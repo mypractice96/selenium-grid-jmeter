@@ -24,10 +24,10 @@ class SampleApplicationTests {
 		cap.setPlatform(Platform.WINDOWS);
 		URL url=new URL("http://192.168.10.48:4444/wd/hub");
 		WebDriver driver=new RemoteWebDriver(url, cap);
-		driver.get("http://192.168.10.20:30677");
+		driver.get("https://www.google.com");
 		String title = driver.getTitle();
-		Assertions.assertEquals("Welcome - Nexus Repository Manager",title);
-         Thread.sleep(2000);
+		Assertions.assertEquals("Google",title);
+                Thread.sleep(2000);
 		driver.close();
 	}
 }
