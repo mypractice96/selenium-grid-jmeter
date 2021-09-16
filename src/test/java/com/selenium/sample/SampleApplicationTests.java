@@ -36,7 +36,7 @@ class SampleApplicationTests {
 	}
 	
 	@Test
-	public void login() {
+	public void login() throws MalformedURLException, InterruptedException {
 		DesiredCapabilities cap=DesiredCapabilities.chrome();
 		cap.setPlatform(Platform.WINDOWS);
 		URL url=new URL("http://192.168.10.48:4444/wd/hub");
