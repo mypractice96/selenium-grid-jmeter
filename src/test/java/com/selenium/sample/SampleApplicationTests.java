@@ -8,6 +8,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
