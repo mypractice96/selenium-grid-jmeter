@@ -48,9 +48,11 @@ class SampleApplicationTests {
 		WebElement login=driver.findElement(By.name("Login"));
 		username.sendKeys("admin");
 		password.sendKeys("password");
+		Thread.sleep(1000);
 		login.click();
 		String actualUrl="http://192.168.10.17:8085/index.php";
 		String expectedUrl= driver.getCurrentUrl();
 		Assertions.assertEquals(expectedUrl,actualUrl);
+		driver.close();
 	}
 }
