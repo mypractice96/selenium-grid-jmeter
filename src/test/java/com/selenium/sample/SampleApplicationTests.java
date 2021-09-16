@@ -30,4 +30,23 @@ class SampleApplicationTests {
                 Thread.sleep(2000);
 		driver.close();
 	}
+	
+	@Test
+	public void login() {
+		DesiredCapabilities cap=DesiredCapabilities.chrome();
+		cap.setPlatform(Platform.WINDOWS);
+		URL url=new URL("http://192.168.10.48:4444/wd/hub");
+		WebDriver driver=new RemoteWebDriver(url, cap);
+		driver.manage().window().maximize();		
+		driver.get("http://192.168.10.17:8085/login.php");
+		WebElement username=driver.findElement(By.name("username"));
+		WebElement password=driver.findElement(By.name("password"));
+		WebElement login=driver.findElement(By.name("Login"));
+		username.sendKeys("admin");
+		password.sendKeys("password");
+		login.click();
+		String actualUrl="http://192.168.10.17:8085/index.php";
+		String expectedUrl= driver.getCurrentUrl();
+		Assertions.assertEquals(expectedUrl,actualUrl);
+	}
 }
