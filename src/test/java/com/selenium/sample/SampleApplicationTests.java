@@ -23,36 +23,29 @@ class SampleApplicationTests {
 	}
 
 	@Test
-	public void runChrome() throws MalformedURLException, InterruptedException {
-		DesiredCapabilities cap=DesiredCapabilities.chrome();
-		cap.setPlatform(Platform.WINDOWS);
-		URL url=new URL("http://192.168.10.48:4444/wd/hub");
-		WebDriver driver=new RemoteWebDriver(url, cap);
-		driver.get("https://www.google.com");
-		String title = driver.getTitle();
-		Assertions.assertEquals("Google",title);
-                Thread.sleep(2000);
-		driver.close();
-	}
-	
-	@Test
 	public void login() throws MalformedURLException, InterruptedException {
+
 		DesiredCapabilities cap=DesiredCapabilities.chrome();
 		cap.setPlatform(Platform.WINDOWS);
-		URL url=new URL("http://192.168.10.48:4444/wd/hub");
+		URL url=new URL("http://192.168.10.47:4444/wd/hub"); //hub url
 		WebDriver driver=new RemoteWebDriver(url, cap);
-		driver.manage().window().maximize();		
-		driver.get("http://192.168.10.17:8085/login.php");
-		WebElement username=driver.findElement(By.name("username"));
-		WebElement password=driver.findElement(By.name("password"));
-		WebElement login=driver.findElement(By.name("Login"));
-		username.sendKeys("admin");
-		password.sendKeys("password");
-		Thread.sleep(1000);
-		login.click();
-		String actualUrl="http://192.168.10.17:8085/index.php";
+		driver.manage().window().maximize();
+		String baseURL = "http://192.168.10.39:7002";
+		driver.get(baseURL); //Petclinic Url
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//*[@id=\"main-navbar\"]/ul/li[2]/a")).click();
+		String actualUrl= baseURL+"/owners/find";
 		String expectedUrl= driver.getCurrentUrl();
 		Assertions.assertEquals(expectedUrl,actualUrl);
+		WebElement find=driver.findElement(By.xpath("//*[@id=\"lastName\"]"));
+		find.sendKeys("Franklin");
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//*[@id=\"search-owner-form\"]/div[2]/div/button")).click();
+		String actualUrl2= baseURL+"/owners/1";
+		String expectedUrl2= driver.getCurrentUrl();
+		Assertions.assertEquals(expectedUrl,actualUrl);
+		Thread.sleep(3000);
 		driver.close();
 	}
 }
+
